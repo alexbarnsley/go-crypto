@@ -80,6 +80,19 @@ func TestSerialiseTransferWithPassphraseAndVendorFieldHex(t *testing.T) {
 	assert.Equal(verified, true)
 }
 
+func TestSerialiseTransferWithPassphraseAndVendorFieldHex2(t *testing.T) {
+	fixtureContents := GetTransactionFixture("transfer", "passphrase-with-vendor-field-hex-2")
+	var fixture TestingTransferFixture
+	_ = json.Unmarshal([]byte(fixtureContents), &fixture)
+
+	transaction := DeserializeTransaction(fixture.Serialized)
+
+	assert := assert.New(t)
+	verified, _ := transaction.Verify()
+	assert.Equal(HexEncode(SerialiseTransaction(transaction)), fixture.Serialized)
+	assert.Equal(verified, true)
+}
+
 func TestSerialiseTransferWithSecondPassphraseAndVendorFieldHex(t *testing.T) {
 	fixtureContents := GetTransactionFixture("transfer", "second-passphrase-with-vendor-field-hex")
 	var fixture TestingTransferFixture
