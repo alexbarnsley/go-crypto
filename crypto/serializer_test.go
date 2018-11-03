@@ -59,7 +59,6 @@ func TestSerialiseTransferWithSecondPassphraseAndVendorField(t *testing.T) {
 	_ = json.Unmarshal([]byte(fixtureContents), &fixture)
 
 	transaction := DeserializeTransaction(fixture.Serialized)
-	println(transaction.VendorFieldHex)
 
 	assert := assert.New(t)
 	verified, _ := transaction.Verify()
