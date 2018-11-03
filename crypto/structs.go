@@ -97,6 +97,7 @@ type Transaction struct {
 	VendorField           string            `json:"vendorField,omitempty"`
 	VendorFieldHex        []byte            `json:"vendorFieldHex,omitempty"`
 	Version               byte              `json:"version,omitempty"`
+	ForceRecipientId      bool              // Used to force in the case of exceptions
 }
 
 type Message struct {

@@ -148,7 +148,7 @@ func (transaction *Transaction) ToBytes(skipSignature, skipSecondSignature bool)
 	_ = binary.Write(buffer, binary.LittleEndian, HexDecode(transaction.SenderPublicKey))
 
 	skipRecipientId := transaction.Type == TRANSACTION_TYPES.SecondSignatureRegistration || transaction.Type == TRANSACTION_TYPES.MultiSignatureRegistration
-	if transaction.RecipientId != "" && !skipRecipientId {
+	if transaction.RecipientId != "" && (transaction.ForceRecipientId || !skipRecipientId) {
 		res, err := base58.Decode(transaction.RecipientId)
 
 		if err != nil {
